@@ -1,0 +1,36 @@
+<h4 class="forecast">
+  <%= model.get("weather")[0].description %>
+</h4>
+
+<hr>
+
+<div class="region">
+  <table class="pure-table pure-table-horizontal">
+    <tbody>
+      <% _.chain(model.get("main"))
+          .pick("temp", "pressure", "humidity")
+          .each(function(value, name) {
+      %>
+        <tr>
+          <td><%= name %></td>
+          <td><%= value %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+<div class="wind region">
+  <table class="pure-table pure-table-horizontal">
+    <tbody>
+      <% _.chain(model.get("wind"))
+          .pick("speed", "deg")
+          .each(function(value, name) {
+      %>
+        <tr>
+          <td>wind <%= name %></td>
+          <td><%= value %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>

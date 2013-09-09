@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <title>WeatherProof</title>
 
-  <link rel="stylesheet" href="vendor/pure-min.css">
-  <link rel="stylesheet" href="styles/theme.css">
+  <!-- Application styles. -->
+  <!-- build:[href] /styles.css -->
+  <link rel="stylesheet" href="/app/styles/index.css">
+  <!-- /build -->
 </head>
+
 <body>
   <div class="background">
-    <img src="images/background.jpg">
+    <img src="/app/img/background.jpg">
   </div>
 
   <h1>Weather<span class="proof">prooF</span></h1>
@@ -24,48 +23,12 @@
   <form class="pure-form">
     <input type="text" class="pure-input-rounded" placeholder="Your location">
 
-    <img class="detect" src="images/geolocation.png">
+    <img class="detect" src="/app/img/geolocation.png">
   </form>
 
   <div class="weather"></div>
 
   <script id="weather-template" type="text/template">
-    <h4 class="forecast">
-      <%= model.get("weather")[0].description %>
-    </h4>
-
-    <hr>
-
-    <div class="region">
-      <table class="pure-table pure-table-horizontal">
-        <tbody>
-          <% _.chain(model.get("main"))
-              .pick("temp", "pressure", "humidity")
-              .each(function(value, name) {
-          %>
-            <tr>
-              <td><%= name %></td>
-              <td><%= value %></td>
-            </tr>
-          <% }); %>
-        </tbody>
-      </table>
-    </div>
-    <div class="wind region">
-      <table class="pure-table pure-table-horizontal">
-        <tbody>
-          <% _.chain(model.get("wind"))
-              .pick("speed", "deg")
-              .each(function(value, name) {
-          %>
-            <tr>
-              <td>wind <%= name %></td>
-              <td><%= value %></td>
-            </tr>
-          <% }); %>
-        </tbody>
-      </table>
-    </div>
   </script>
   </div>
 
@@ -73,19 +36,9 @@
     Powered by: <a href="http://openweathermap.org/">OpenWeatherMap</a>
   </footer>
 
-  <!-- Vendor libraries. -->
-  <script src="vendor/jquery.js"></script>
-  <script src="vendor/underscore.js"></script>
-  <script src="vendor/backbone.js"></script>
-
-  <!-- Application. -->
-  <script src="source/router.js"></script>
-  <script src="source/app.js"></script>
-  <script src="source/views/form.js"></script>
-  <script src="source/views/weather.js"></script>
-  <script src="source/models/weather.js"></script>
-
-  <!-- Start the application. -->
-  <script> app.initialize(); </script>
+  <!-- Application source. -->
+  <!-- build:[src] /source.min.js -->
+  <script data-main="/app/main" src="/vendor/bower/requirejs/require.js"></script>
+  <!-- /build -->
 </body>
 </html>
