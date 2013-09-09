@@ -11,13 +11,13 @@ var WeatherModel = Backbone.Model.extend({
 
   parse: function(resp) {
     // Convert Kelvin to Fahrenheit.
-    resp.main.temp = Math.floor((resp.main.temp - 273.15) * 1.8) + 32 + "f";
+    resp.main.temp = Math.floor((resp.main.temp - 273.15) * 1.8) + 32 + " F";
     // Add a percentage sign.
     resp.main.humidity = resp.main.humidity + "%";
     // Add sea level (mb) unit.
-    resp.main.pressure = resp.main.pressure + " mb";
+    resp.main.pressure = resp.main.pressure + " MB";
     // Convert wind speed to MPH.
-    resp.wind.speed = (resp.wind.speed * 1.15078).toFixed(2) + " mph";
+    resp.wind.speed = (resp.wind.speed * 1.15078).toFixed(2) + " MPH";
     // Add deg symbol.
     resp.wind.deg = resp.wind.deg + "&deg;";
 
