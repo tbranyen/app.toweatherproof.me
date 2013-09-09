@@ -133,3 +133,15 @@ header {
 .region {
   background: rgba(0, 0, 0, 0.07);
 }
+
+.detect {
+  position: fixed;
+  top: 120px;
+  right: 55px;
+  cursor: pointer;
+  opacity: .5;
+}
+
+.detect:hover {
+  opacity: 1;
+}

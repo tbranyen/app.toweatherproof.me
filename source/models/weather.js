@@ -1,6 +1,12 @@
 var WeatherModel = Backbone.Model.extend({
   url: function() {
-    return app.api + "weather?callback=?&q=" + this.get("name")
+    var base = app.api + "weather?callback=?&";
+
+    if (!this.useLatLng) {
+      return base + "q=" + this.get("name");
+    }
+
+    return base + "lat=" + this.get("lat") + "&lon=" + this.get("lng");
   },
 
   parse: function(resp) {

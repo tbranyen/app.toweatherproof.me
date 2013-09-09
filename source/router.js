@@ -1,7 +1,8 @@
 var Router = Backbone.Router.extend({
   routes: {
     "": "index",
-    "weather/:city": "showWeather"
+    "weather/:city": "showWeather",
+    "weather/:lat/:lng": "showWeatherByLatLng"
   },
 
   initialize: function() {
@@ -46,6 +47,32 @@ var Router = Backbone.Router.extend({
     // Show weather view once data has been fetched.
     this.weatherModel.once("sync", function() {
       this.weatherView.render();
+    }, this);
+
+    this.weather.append(this.weatherView.el);
+  },
+
+  showWeatherByLatLng: function(lat, lng) {
+    this.background.addClass("flip");
+    this.weather.empty();
+
+    this.weatherModel.useLatLng = true;
+    this.weatherModel.set({
+      "lat": lat, "lng": lng
+    });
+
+    // Get the latest weather.
+    this.weatherModel.fetch();
+
+    // Show weather view once data has been fetched.
+    this.weatherModel.once("sync", function() {
+      this.weatherView.render();
+
+      // Set to city name from API.
+      this.formView.$("input").val(this.weatherModel.get("name"));
+
+      // Hard reset the url to this new name.
+      app.router.navigate("weather/" + this.weatherModel.get("name"));
     }, this);
 
     this.weather.append(this.weatherView.el);
