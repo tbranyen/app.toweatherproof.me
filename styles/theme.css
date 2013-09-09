@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #000;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0 20px;
+
+  color: #FFF;
+
+  text-align: center;
+}
+
+.background {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  left: 0;
+  z-index: -1;
+}
+
+body.animate .background {
+  -webkit-transition: all linear .5s;
+}
+
+.background.flip {
+  top: -100%;
+  opacity: .5;
+}
+
+.background img {
+  max-width: 100%;
+  min-width: 50%;
+  min-height: 50%;
+  display: block;
+}
+
+.pure-form input {
+  margin: 0 auto;
+  width: 100%;
+  padding: 15px !important;
+}
+
+body.animate .pure-form input {
+  -webkit-transition: background-color linear .5s;
+  font-size: 18px;
+}
+
+.background.flip ~ .pure-form input {
+  background-color: rgba(0, 0, 0, .15);
+  color: #FFF;
+  border: none;
+}
+
+h1 {
+  margin-top: 0px;
+  padding-top: 50px;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  position: fixed;
+  bottom: 30px;
+  margin: 0 auto;
+  left: 50%;
+  margin-left: -111.5px;
+}
+
+a {
+  background: rgba(0, 0, 0, .2);
+  padding: 4px;
+}
+
+a, span.proof {
+  color: #4CF1FF;
+}
+
+hr {
+  opacity: .3;
+}
+
+.weather {
+  font-size: 30px;
+  margin: 15px;
+}
+
+.weather .icon {
+  position: relative;
+  top: 15px;
+}
+
+.weather .temp {
+  color: #333;
+}
+
+.weather .temp .f {
+  color: #A8C5E0;
+}
+
+table {
+  margin-top: 10px;
+  width: 100%;
+  border: none !important;
+  text-align: left;
+  font-size: 18px;
+}
+
+table tr td:nth-child(2) {
+  text-align: right;
+  border-color: #4CF1FF;
+  color: #A8C5E0;
+}
+
+header {
+  background: rgba(0, 0, 0, 0.2);
+  color: #FFF;
+  text-align: left;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.region {
+  background: rgba(0, 0, 0, 0.07);
+}
