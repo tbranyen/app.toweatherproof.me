@@ -15,15 +15,16 @@ var FormView = Backbone.View.extend({
 
     // Attempt to use geolocation, unless previously failed.
     if (navigator.geolocation && this.tryGeolocation) {
+      // Find the current position.
       navigator.geolocation.getCurrentPosition(function(geo) {
+        // Find the lat and long.
         var lat = geo.coords.latitude;
         var lng = geo.coords.longitude;
 
+        // Lose focus on the input to make the animation look nicer.
+        this.input.trigger("blur");
         app.router.navigate("weather/" + lat + "/" + lng, true);
 
-        // On error, do not try again.
-        this.tryGeolocation = false;
-      }.bind(this), function() {
         // On error, do not try again.
         this.tryGeolocation = false;
       }.bind(this));
@@ -31,19 +32,21 @@ var FormView = Backbone.View.extend({
   },
 
   showWeather: function(ev) {
+    // Lose focus on the input to make the animation look nicer.
     this.input.trigger("blur");
     app.router.navigate("weather/" + this.input.val(), true);
 
     return false;
   },
 
+  // Will automatically retry if selected.
   autoDetect: function(ev) {
     this.tryGeolocation = true;
-
     this.changeWeather();
   },
 
   initialize: function() {
+    // Cache the input lookup.
     this.input = this.$("input");
   }
 });

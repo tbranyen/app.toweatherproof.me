@@ -11,7 +11,7 @@ var WeatherModel = Backbone.Model.extend({
 
   parse: function(resp) {
     // Convert Kelvin to Fahrenheit.
-    resp.main.temp = Math.floor((resp.main.temp - 273.15) * 1.8) + 32 + " F";
+    resp.main.temp = Math.floor((resp.main.temp - 273.15) * 1.8) + 32 + "f";
     // Add a percentage sign.
     resp.main.humidity = resp.main.humidity + "%";
     // Add sea level (mb) unit.
