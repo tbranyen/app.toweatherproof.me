@@ -46,6 +46,7 @@ define(function(require, exports, module) {
     showWeather: function(city) {
       this.background.addClass("flip");
       this.weather.empty();
+      this.formView.tryGeolocation = false;
 
       this.weatherModel.set("name", city);
 
@@ -66,6 +67,7 @@ define(function(require, exports, module) {
     showWeatherByLatLng: function(lat, lng) {
       this.background.addClass("flip");
       this.weather.empty();
+      this.formView.tryGeolocation = false;
 
       this.weatherModel.useLatLng = true;
       this.weatherModel.set({
