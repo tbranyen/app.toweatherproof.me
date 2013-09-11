@@ -38,8 +38,8 @@ var FormView = Backbone.View.extend({
         }.bind(this),
 
         {
-          // If a location is not found after a second, timeout.
-          timeout: 1000
+          // If a location is not found after five seconds, timeout.
+          timeout: 5000
         }
       );
     }
