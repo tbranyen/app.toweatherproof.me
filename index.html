@@ -3,9 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>WeatherProof</title>
+
+  <!-- Explicity define where icons exist on the server. -->
+  <link rel="apple-touch-icon-precomposed" href="/ios.png">
+  <link rel="shortcut icon" href="/favicon.ico">
 
   <!-- Application styles. -->
   <!-- build:[href] /styles.min.css -->
@@ -14,16 +21,13 @@
 </head>
 
 <body>
-  <div class="background">
-    <img src="/app/img/background.jpg">
-  </div>
+  <div class="background"><img src="/app/img/background.jpg"></div>
 
   <h1>Weather<span class="proof">prooF</span></h1>
 
   <form class="pure-form">
-    <input type="text" class="pure-input-rounded" placeholder="Your location">
-
     <img class="detect" src="/app/img/geolocation.png">
+    <input type="text" class="pure-input-rounded" placeholder="Your location">
   </form>
 
   <div class="weather"></div>

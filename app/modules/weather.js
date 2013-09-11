@@ -39,6 +39,10 @@ define(function(require, exports, module) {
 
     render: function() {
       this.$el.html(this.template(this));
+    },
+ 
+    renderFailure: function() {
+      this.$el.html("Unable to get weather at this time.");
     }
   });
 });

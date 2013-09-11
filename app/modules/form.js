@@ -22,20 +22,27 @@ define(function(require, exports, module) {
       // Attempt to use geolocation, unless already found.
       if (navigator.geolocation && this.tryGeolocation) {
         // Find the current position.
-        navigator.geolocation.getCurrentPosition(function(geo) {
-          var lat = geo.coords.latitude;
-          var lng = geo.coords.longitude;
-
-          // Lose focus on the input to make the animation look nicer.
-          this.input.trigger("blur");
-          app.router.navigate("weather/" + lat + "/" + lng, true);
-
-          // On error, do not try again.
-          this.tryGeolocation = false;
-        }.bind(this), function() {
-          // On error, do not try again.
-          this.tryGeolocation = false;
-        }.bind(this));
+        navigator.geolocation.getCurrentPosition(
+          // Success.
+          function(geo) {
+            // Find the lat and long.
+            var lat = geo.coords.latitude;
+            var lng = geo.coords.longitude;
+  
+            // Lose focus on the input to make the animation look nicer.
+            this.input.trigger("blur");
+            app.router.navigate("weather/" + lat + "/" + lng, true);
+  
+            // On error, do not try again.
+            this.tryGeolocation = false;
+          }.bind(this),
+  
+          // Failure.
+          function() {
+            this.input.prop("placeholder",
+              "Unable to get location, please type manually.");
+          }.bind(this)
+        );
       }
     },
 
