@@ -60,9 +60,9 @@ define(function(require, exports, module) {
 
       // Get the latest weather.
       this.weatherModel.fetch({
+        // If no weather is found after a second, display an error.
         timeout: 1000,
 
-        // If no weather is found after half a second, display an error.
         error: function() {
           this.weatherView.renderFailure();
         }.bind(this)

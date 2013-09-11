@@ -41,7 +41,12 @@ define(function(require, exports, module) {
           function() {
             this.input.prop("placeholder",
               "Unable to get location, please type manually.");
-          }.bind(this)
+          }.bind(this),
+
+          {
+            // If a location is not found after a second, timeout.
+            timeout: 1000
+          }
         );
       }
     },

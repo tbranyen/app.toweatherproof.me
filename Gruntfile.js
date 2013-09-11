@@ -117,7 +117,8 @@ module.exports = function(grunt) {
       release: {
         files: [
           { src: ["app/**"], dest: "dist/" },
-          { src: "vendor/**", dest: "dist/" }
+          { src: "vendor/**", dest: "dist/" },
+          { src: "cache.manifest", dest: "dist/cache.manifest" }
         ]
       }
     }
