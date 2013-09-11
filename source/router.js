@@ -1,6 +1,6 @@
 var Router = Backbone.Router.extend({
   routes: {
-    "": "index",
+    "": "home",
     "weather/:city": "showWeather",
     "weather/:lat/:lng": "showWeatherByLatLng"
   },
@@ -25,9 +25,14 @@ var Router = Backbone.Router.extend({
     window.setTimeout(function() {
       app.mainElement.addClass("animate");
     }, 250);
+
+    // Enable fullscreen in Webkit devices.
+    app.mainElement.find("h1").click(function() {
+      document.documentElement.webkitRequestFullScreen();
+    });
   },
 
-  index: function() {
+  home: function() {
     this.background.removeClass("flip");
     this.weather.empty();
   },
@@ -39,11 +44,18 @@ var Router = Backbone.Router.extend({
 
     this.weatherModel.set("name", city);
 
-    // Redundant.
+    // Fill this in with whatever is passed by the URL param.
     this.formView.$("input").val(city);
 
     // Get the latest weather.
-    this.weatherModel.fetch();
+    this.weatherModel.fetch({
+      timeout: 1000,
+
+      // If no weather is found after half a second, display an error.
+      error: function() {
+        this.weatherView.renderFailure();
+      }.bind(this)
+    });
 
     // Show weather view once data has been fetched.
     this.weatherModel.once("sync", function() {

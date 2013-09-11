@@ -42,10 +42,15 @@ body.animate .background {
   display: block;
 }
 
+.pure-form {
+  position: relative;
+}
+
 .pure-form input {
   margin: 0 auto;
   width: 100%;
   padding: 15px !important;
+  padding-left: 22px !important;
   outline: none;
 }
 
@@ -136,11 +141,12 @@ header {
 }
 
 .detect {
-  position: fixed;
-  top: 120px;
-  right: 55px;
+  position: relative;
+  top: 43px;
+  right: 18px;
   cursor: pointer;
   opacity: .5;
+  float: right;
 }
 
 .detect:hover {

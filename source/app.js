@@ -1,5 +1,5 @@
 var app = {
-  // Where application is stored.
+  // Where application is located in the DOM.
   mainElement: $("body"),
 
   // Store reference to API.
@@ -7,7 +7,7 @@ var app = {
 };
 
 // This is triggered in the HTML once all the source code loads.
-app.initialize = function() {
+app.start = function() {
   // Store reference to Router.
   app.router = new Router();
 

@@ -7,5 +7,9 @@ var WeatherView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this));
+  },
+
+  renderFailure: function() {
+    this.$el.html("Unable to get weather at this time.");
   }
 });
