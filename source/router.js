@@ -25,11 +25,6 @@ var Router = Backbone.Router.extend({
     window.setTimeout(function() {
       app.mainElement.addClass("animate");
     }, 250);
-
-    // Enable fullscreen in Webkit devices.
-    app.mainElement.find("h1").click(function() {
-      document.documentElement.webkitRequestFullScreen();
-    });
   },
 
   home: function() {
