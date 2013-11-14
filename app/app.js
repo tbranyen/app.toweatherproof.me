@@ -1,14 +1,18 @@
 define(function(require, exports, module) {
   "use strict";
 
+  // External dependencies.
   var $ = require("jquery");
 
+  // Alias the module for easier identification.
+  var app = module.exports;
+
   // The root path to run the application through.
-  exports.root = "/";
+  app.root = "/";
 
   // Where application is stored.
-  exports.mainElement = $("body");
+  app.mainElement = $("main");
 
   // Store reference to API.
-  exports.api = "http://api.openweathermap.org/data/2.5/";
+  app.api = "http://api.openweathermap.org/data/2.5/";
 });

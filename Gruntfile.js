@@ -118,7 +118,8 @@ module.exports = function(grunt) {
         files: [
           { src: ["app/**"], dest: "dist/" },
           { src: "vendor/**", dest: "dist/" },
-          { src: "cache.manifest", dest: "dist/cache.manifest" }
+          { src: "ios.png", dest: "dist/ios.png" },
+          { src: "favicon.ico", dest: "dist/favicon.ico" }
         ]
       }
     }

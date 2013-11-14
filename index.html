@@ -6,8 +6,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>WeatherProof</title>
 
@@ -22,20 +21,22 @@
 </head>
 
 <body>
-  <div class="background"><img src="/app/img/background.jpg"></div>
+  <main role="main" id="main">
+    <div class="background"><img src="/app/img/background.jpg"></div>
 
-  <h1>Weather<span class="proof">prooF</span></h1>
+    <h1>Weather<span class="proof">prooF</span></h1>
 
-  <form class="pure-form">
-    <img class="detect" src="/app/img/geolocation.png">
-    <input type="text" class="pure-input-rounded" placeholder="Your location">
-  </form>
+    <form class="pure-form">
+      <img class="detect" src="/app/img/geolocation.png">
+      <input type="text" class="pure-input-rounded" placeholder="Your location">
+    </form>
 
-  <div class="weather"></div>
+    <div class="weather"></div>
 
-  <footer>
-    Powered by: <a href="http://openweathermap.org/">OpenWeatherMap</a>
-  </footer>
+    <footer>
+      Powered by: <a href="http://openweathermap.org/">OpenWeatherMap</a>
+    </footer>
+  </main>
 
   <!-- Application source. -->
   <!-- build:[src] /source.min.js -->

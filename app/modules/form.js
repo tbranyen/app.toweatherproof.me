@@ -18,6 +18,19 @@ define(function(require, exports, module) {
     changeWeather: function(ev) {
       app.router.navigate("", true);
       this.input.val("");
+    },
+
+    showWeather: function(ev) {
+      // Lose focus on the input to make the animation look nicer.
+      this.input.trigger("blur");
+      app.router.navigate("weather/" + this.input.val(), true);
+
+      return false;
+    },
+
+    // Will automatically retry if selected.
+    autoDetect: function(ev) {
+      this.tryGeolocation = true;
 
       // Attempt to use geolocation, unless already found.
       if (navigator.geolocation && this.tryGeolocation) {
@@ -49,20 +62,6 @@ define(function(require, exports, module) {
           }
         );
       }
-    },
-
-    showWeather: function(ev) {
-      // Lose focus on the input to make the animation look nicer.
-      this.input.trigger("blur");
-      app.router.navigate("weather/" + this.input.val(), true);
-
-      return false;
-    },
-
-    // Will automatically retry if selected.
-    autoDetect: function(ev) {
-      this.tryGeolocation = true;
-      this.changeWeather();
     },
 
     initialize: function() {

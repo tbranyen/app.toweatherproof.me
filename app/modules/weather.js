@@ -8,10 +8,12 @@ define(function(require, exports, module) {
     url: function() {
       var base = app.api + "weather?callback=?&";
 
+      // If we are not using Lat and Lng use the query search.
       if (!this.useLatLng) {
         return base + "q=" + this.get("name");
       }
 
+      // Otherwise be more specific and fetch the exact weather.
       return base + "lat=" + this.get("lat") + "&lon=" + this.get("lng");
     },
 
@@ -33,8 +35,7 @@ define(function(require, exports, module) {
 
   exports.View = Backbone.View.extend({
     initialize: function() {
-      var contents = require("text!templates/weather.html");
-      this.template = _.template(contents);
+      this.template = require("ldsh!templates/weather");
     },
 
     render: function() {

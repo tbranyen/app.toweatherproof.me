@@ -1,8 +1,0 @@
-CACHE MANIFEST 
-NETWORK: 
-*
-CACHE:
-/app/img/background.jpg
-/app/img/geolocation.png
-/styles.min.css
-/source.min.js

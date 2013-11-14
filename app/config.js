@@ -11,10 +11,13 @@ require.config({
     // Opt for Lo-Dash Underscore compatibility build over Underscore.
     "underscore": "../vendor/bower/lodash/dist/lodash.underscore",
 
+    // Map Lo-Dash for the template loader.
+    "lodash": "../vendor/bower/lodash/dist/lodash",
+
     // Map remaining vendor dependencies.
     "jquery": "../vendor/bower/jquery/jquery",
     "backbone": "../vendor/bower/backbone/backbone",
-    "text": "../vendor/bower/requirejs-text/text"
+    "ldsh": "../vendor/bower/lodash-template-loader/loader"
   },
 
   shim: {

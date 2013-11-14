@@ -1,12 +1,12 @@
 {
-  "name": "weatherproof",
+  "name": "app.toweatherproof.me",
 
   "dependencies": {
-    "almond": "~0.2.5",
-    "lodash": "~1.3.1",
-    "backbone": "~1.0.0",
+    "almond": "~0.2.6",
+    "lodash": "~2.2.1",
+    "backbone": "~1.1.0",
     "jquery": "~2.0.3",
-    "requirejs": "~2.1.8",
-    "requirejs-text": "~2.0.10"
+    "requirejs": "~2.1.9",
+    "lodash-template-loader": "~0.1.3"
   }
 }
