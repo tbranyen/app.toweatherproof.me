@@ -28,6 +28,9 @@ define(function(require, exports, module) {
 
     // Will automatically retry if selected.
     autoDetect: function(ev) {
+      // Lose focus on the input to make the animation look nicer.
+      this.input.trigger("blur");
+
       // Attempt to use geolocation, unless already found.
       if (navigator.geolocation) {
         // Find the current position.
