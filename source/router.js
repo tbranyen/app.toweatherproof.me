@@ -35,7 +35,6 @@ var Router = Backbone.Router.extend({
   showWeather: function(city) {
     this.background.addClass("flip");
     this.weather.empty();
-    this.formView.tryGeolocation = false;
 
     this.weatherModel.set("name", city);
 
@@ -63,7 +62,6 @@ var Router = Backbone.Router.extend({
   showWeatherByLatLng: function(lat, lng) {
     this.background.addClass("flip");
     this.weather.empty();
-    this.formView.tryGeolocation = false;
 
     this.weatherModel.useLatLng = true;
     this.weatherModel.set({

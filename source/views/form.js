@@ -7,10 +7,6 @@ var FormView = Backbone.View.extend({
     "click .detect": "autoDetect"
   },
 
-  initialize: function() {
-    this.hasGeoLocation = navigator.geolocation;
-  },
-
   changeWeather: function(ev) {
     app.router.navigate("", true);
     this.input.val("");
@@ -26,8 +22,11 @@ var FormView = Backbone.View.extend({
 
   // Will automatically retry if selected.
   autoDetect: function(ev) {
+    // Lose focus on the input to make the animation look nicer.
+    this.input.trigger("blur");
+
     // Attempt to use geolocation.
-    if (this.hasGeoLocation) {
+    if (navigator.geolocation) {
       // Find the current position.
       navigator.geolocation.getCurrentPosition(
         // Success.
