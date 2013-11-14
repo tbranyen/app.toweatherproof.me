@@ -7,8 +7,6 @@ define(function(require, exports, module) {
   exports.View = Backbone.View.extend({
     el: ".pure-form",
 
-    tryGeolocation: true,
-
     events: {
       "click input": "changeWeather",
       "submit": "showWeather",
@@ -30,10 +28,8 @@ define(function(require, exports, module) {
 
     // Will automatically retry if selected.
     autoDetect: function(ev) {
-      this.tryGeolocation = true;
-
       // Attempt to use geolocation, unless already found.
-      if (navigator.geolocation && this.tryGeolocation) {
+      if (navigator.geolocation) {
         // Find the current position.
         navigator.geolocation.getCurrentPosition(
           // Success.
@@ -45,9 +41,6 @@ define(function(require, exports, module) {
             // Lose focus on the input to make the animation look nicer.
             this.input.trigger("blur");
             app.router.navigate("weather/" + lat + "/" + lng, true);
-  
-            // On error, do not try again.
-            this.tryGeolocation = false;
           }.bind(this),
   
           // Failure.
