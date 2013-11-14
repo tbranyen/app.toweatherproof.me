@@ -1,11 +1,9 @@
-// Grunt configuration updated to latest Grunt.  That means your minimum
-// version necessary to run these tasks is Grunt 0.4.
 module.exports = function(grunt) {
   "use strict";
 
   grunt.initConfig({
-    // Empty and remove `dist/` directory.
-    clean: ["dist/"],
+    // Wipe out previous builds and test reporting.
+    clean: ["dist/", "test/reports"],
 
     // Run your source code through JSHint's defaults.
     jshint: ["app/**/*.js"],
@@ -15,40 +13,31 @@ module.exports = function(grunt) {
     requirejs: {
       release: {
         options: {
-          // Include the main ration file.
           mainConfigFile: "app/config.js",
+          generateSourceMaps: true,
+          include: ["main"],
+          insertRequire: ["main"],
+          out: "dist/source.min.js",
+          optimize: "uglify2",
+
+          // Since we bootstrap with nested `require` calls this option allows
+          // R.js to find them.
+          findNestedDependencies: true,
+
+          // Include a minimal AMD implementation shim.
+          name: "almond",
 
           // Setting the base url to the distribution directory allows the
           // Uglify minification process to correctly map paths for Source
           // Maps.
           baseUrl: "dist/app",
 
-          // Include Almond to slim down the built filesize.
-          name: "almond",
-
-          // Set main.js as the main entry point.
-          include: ["main"],
-          insertRequire: ["main"],
-
-          // Since we bootstrap with nested `require` calls this option allows
-          // R.js to find them.
-          findNestedDependencies: true,
-
           // Wrap everything in an IIFE.
           wrap: true,
 
-          // Output file.
-          out: "dist/source.min.js",
-
-          // Enable Source Map generation.
-          generateSourceMaps: true,
-
-          // Do not preserve any license comments when working with source maps.
-          // These options are incompatible.
-          preserveLicenseComments: false,
-
-          // Minify using UglifyJS.
-          optimize: "uglify2"
+          // Do not preserve any license comments when working with source
+          // maps.  These options are incompatible.
+          preserveLicenseComments: false
         }
       }
     },
@@ -117,10 +106,89 @@ module.exports = function(grunt) {
       release: {
         files: [
           { src: ["app/**"], dest: "dist/" },
-          { src: "vendor/**", dest: "dist/" },
-          { src: "ios.png", dest: "dist/ios.png" },
-          { src: "favicon.ico", dest: "dist/favicon.ico" }
+          { src: "vendor/**", dest: "dist/" }
         ]
+      }
+    },
+
+    compress: {
+      release: {
+        options: {
+          archive: "dist/source.min.js.gz"
+        },
+
+        files: ["dist/source.min.js"]
+      }
+    },
+
+    // Unit testing is provided by Karma.  Change the two commented locations
+    // below to either: mocha, jasmine, or qunit.
+    karma: {
+      options: {
+        basePath: process.cwd(),
+        singleRun: true,
+        captureTimeout: 7000,
+        autoWatch: true,
+        logLevel: "ERROR",
+
+        reporters: ["dots", "coverage"],
+        browsers: ["PhantomJS"],
+
+        // Change this to the framework you want to use.
+        frameworks: ["mocha"],
+
+        plugins: [
+          "karma-jasmine",
+          "karma-mocha",
+          "karma-qunit",
+          "karma-phantomjs-launcher",
+          "karma-coverage"
+        ],
+
+        preprocessors: {
+          "app/**/*.js": "coverage"
+        },
+
+        coverageReporter: {
+          type: "lcov",
+          dir: "test/coverage"
+        },
+
+        files: [
+          // You can optionally remove this or swap out for a different expect.
+          "vendor/bower/chai/chai.js",
+          "vendor/bower/requirejs/require.js",
+          "test/runner.js",
+
+          { pattern: "app/**/*.*", included: false },
+          // Derives test framework from Karma configuration.
+          {
+            pattern: "test/<%= karma.options.frameworks[0] %>/**/*.spec.js",
+            included: false
+          },
+          { pattern: "vendor/**/*.js", included: false }
+        ]
+      },
+
+      // This creates a server that will automatically run your tests when you
+      // save a file and display results in the terminal.
+      daemon: {
+        options: {
+          singleRun: false
+        }
+      },
+
+      // This is useful for running the tests just once.
+      run: {
+        options: {
+          singleRun: true
+        }
+      }
+    },
+
+    coveralls: {
+      options: {
+        coverage_dir: "test/coverage/PhantomJS 1.9.2 (Linux)/"
       }
     }
   });
@@ -130,8 +198,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-contrib-compress");
 
   // Third-party tasks.
+  grunt.loadNpmTasks("grunt-karma");
+  grunt.loadNpmTasks("grunt-karma-coveralls");
   grunt.loadNpmTasks("grunt-processhtml");
 
   // Grunt BBB tasks.
@@ -141,9 +212,12 @@ module.exports = function(grunt) {
 
   // When running the default Grunt command, just lint the code.
   grunt.registerTask("default", [
-    "clean", "jshint", "processhtml", "copy", "requirejs", "styles", "cssmin"
+    "clean",
+    "jshint",
+    "processhtml",
+    "copy",
+    "requirejs",
+    "styles",
+    "cssmin",
   ]);
-
-  // The test task take care of starting test server and running tests.
-  grunt.registerTask("test", ["jshint", "server:test", "karma"]);
 };
